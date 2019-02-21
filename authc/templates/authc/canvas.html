@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'authc/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'authc/normalize.css' %}" />
+<script src="{% static 'authc/jquery-3.1.0.min.js' %}"> </script>
+<script src="{% static 'authc/fingerprintjs2/fingerprint2.js' %}"> </script>
+<script src="{% static 'authc/utils.js' %}"></script>
+<script src="{% static 'authc/canvas.js' %}"> </script>
+<div class="infoMessage">
+</div>
+<div class="errorMessage">
+  
+</div>
+<div id="progress" class="chart" data-percent="0">
+  <canvas id="canvasProgress"></canvas>
+</div>
+<!--<canvas id="canvas"> </canvas>-->
+<canvas id="canvas" style="visibility: hidden"> </canvas> 
+<div id="email" style="visibility: hidden">{{email}}</div>

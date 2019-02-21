@@ -1,0 +1,119 @@
+
+
+{% load staticfiles %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'authc/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'authc/normalize.css' %}" />
+<script src="{% static 'authc/jquery-3.1.0.min.js' %}"> </script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<div class="message">
+  {% if errorMessage %}
+  <div class="errorMessage">
+    <p>{{errorMessage}} </p>
+  </div>
+  {% elif infoMessage %}
+  <div class "infoMessage">
+    <p>{{infoMessage}}</p>
+  </div>
+  {% endif %}
+</div>
+
+<div class="form">
+<form action={{action}} method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input class='login' type="submit" style="cursor:pointer" value={{valueSubmit}} />
+</form>
+</div>
+<div class="simpleContainer">
+  <img id="fr" src="{% static 'authc/fr.png' %}" style="width:40px; height:25px; cursor:pointer; top:0px">
+  <img id="en" src="{% static 'authc/en.png' %}" style="width:40px; height:25px; cursor:pointer; top:0px">
+  <div id="textdiv">
+  <h3>Hey! Qu'est-ce que c'est?</h3>
+  <p style="margin-top:5px;">
+  Nous développons, au Crypto Group de l'UCL (<a href="https://uclouvain.be/crypto">https://uclouvain.be/crypto</a>) avec la collaboration de la VUB, un nouveau protocole d'authentification pour le web basé sur du deep learning - Le système fonctionne en deux étapes:
+  la première consiste en une phase d'apprentisage sur des données collectées par le navigateur et envoyées au serveur. La seconde consiste en un protocole "challenge-response" où
+  un "challenge" est envoyé par le serveur, que votre navigateur s'empresse de résoudre et de renvoyer au serveur. Grâce à la phase d'apprentissage, le serveur sera capable de
+  déterminer si le challenge a bien été résolu par votre ordinateur avec une certaine probabilité.
+  </p>
+  <p style="margin-top:5px">
+    Un avantage intéressant de ce protocole consiste en une interaction minimum entre l'utilisateur et le serveur: passé la phase d'apprentissage, chaque authentification est réalisée automatiquement.
+    Cela peut permettre notamment de renforcer la sécurité de vos applications par le biais d'une double authentification - La première, classique, votre mot de passe et la seconde, invisible, ce protocole.
+    Ce protocole ne nécessite pas non plus l'installation d'un programme - n'importe quel navigateur récent est compatible!
+  </p>
+  <h3>Pourquoi dois-je indiquer mon email?</h3>
+  <p style="margin-top:5px">
+    Il nous faut un identifiant unique pour chaque utilisateur - votre email est unique. Vous pouvez tout à fait indiquer une fausse adresse email.
+    Nous n'utiliserons pas votre adresse à une quelconque autre fin.
+  </p>
+  <h3>Que dois-je faire?</h3>
+  <p style="margin-top:5px">
+    Indiquer un identifiant email, remplir le captcha et cliquer sur le bouton "Participate". Une barre de chargement indiquera ensuite la progression de la collecte de données -
+    Ne fermez pas l'onglet ou le navigateur avant la fin (moins de 3 minutes).
+  </p>
+  </div>
+</div>
+
+{% if logged %}
+<div class=logout>
+  <a href="/logout/"> Logout</a>
+</div>
+{%endif%}
+
+    <script>
+      var textfr = "  <h3>Hey! Qu'est-ce que c'est?</h3>\
+  <p style='margin-top:5px;'>\
+  Nous développons, au Crypto Group de l'UCL (<a href='https://uclouvain.be/crypto'>https://uclouvain.be/crypto</a>) avec la collaboration de la VUB, un nouveau protocole d'authentification pour le web basé sur du deep learning - Le système fonctionne en deux étapes:\
+  la première consiste en une phase d'apprentisage sur des données collectées par le navigateur et envoyées au serveur. La seconde consiste en un protocole \"challenge-response\" où\
+      un \"challenge\" est envoyé par le serveur, que votre navigateur s'empresse de résoudre et de renvoyer au serveur. Grâce à la phase d'apprentissage, le serveur sera capable de\
+  déterminer si le challenge a bien été résolu par votre ordinateur avec une certaine probabilité.\
+  </p>\
+  <p style='margin-top:5px'>\
+    Un avantage intéressant de ce protocole consiste en une interaction minimum entre l'utilisateur et le serveur: passé la phase d'apprentissage, chaque authentification est réalisée automatiquement.\
+    Cela peut permettre notamment de renforcer la sécurité de vos applications par le biais d'une double authentification - La première, classique, votre mot de passe et la seconde, invisible, ce protocole.\
+    Ce protocole ne nécessite pas non plus l'installation d'un programme - n'importe quel navigateur récent est compatible!\
+  </p>\
+  <h3>Pourquoi dois-je indiquer mon email?</h3>\
+  <p style='margin-top:5px'>\
+    Il nous faut un identifiant unique pour chaque utilisateur - votre email est unique. Vous pouvez tout à fait indiquer une fausse adresse email.\
+    Nous n'utiliserons pas votre adresse à une quelconque autre fin.\
+  </p>\
+  <h3>Que dois-je faire?</h3>\
+  <p style='margin-top:5px'>\
+    Indiquer un identifiant email, remplir le captcha et cliquer sur le bouton \"Participate\". Une barre de chargement indiquera ensuite la progression de la collecte de données -\
+    Ne fermez pas l'onglet ou le navigateur avant la fin (moins de 3 minutes).\
+  </p>";
+       var texten = "\
+        <h3> Hey! What is this page? </h3>\
+        <p style='margin-top:5px'>\
+        We are developping, at the UCL Crypto Group (<a href='https://uclouvain.be/crypto'>https://uclouvain.be/crypto</a>) with the VUB, a new authentication protocol for web based services using deep learning -\
+        The system works in two steps: the first step consists in a learning phase over collected data done by your browser and sent to our server. The second step consists in a \"challenge-response\" \
+        protocol where a challenge is sent by the server to your browser, which solves it and sends it back to the server. Thanks to the learning phase, the server will be capable of guessing if the\
+        challenge has been solved by the right computer.\
+        </p>\
+        <p style='margin-top:5px'>\
+          An intersting advantage of this protocol lies in a minimal interaction between the user and the server: past the learning phase, each authentication is self-realised in an invisible way\
+          to the user. This protocol can be used to strenghten the security of your web applications thanks to a double authentication - the first one as usual: your password, and the second one,\
+          without any interaction: this protocol. Moreover, any recent browser is compatible without any need for software installation.\
+        </p>\
+        <h3> Why should I put my email?</h3>\
+      <p style='margin-top:5px'>\
+        We only need one unique id - and your email is unique. We are not going to share this information or send you any spam. You can also put random fake email.\
+        </p>\
+        <p style='margin-top:5px'>\
+        <h3> What should I do?</h3>\
+          You just have to indicate your email, fill the captcha and click on \"Participate\". A loading animation will give you info about the data collection progress - Do not close your browser before\
+          it reaches 100\% or your data will be loss (less than 3 minutes).\
+        </p>\
+      ";
+       $(document).ready(function() {
+         $("#fr").click(function() {
+           $("#textdiv").html(textfr);
+         });
+         $("#en").click(function() {
+           $("#textdiv").html(texten);
+         });
+       });
+    </script>

@@ -1,0 +1,33 @@
+
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'authc/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'authc/normalize.css' %}" />
+<script src="{% static 'authc/jquery-3.1.0.min.js' %}"> </script>
+<script src="{% static 'authc/utils.js' %}"> </script>
+<script src="{% static 'authc/authenticate.js' %}"> </script>
+
+  <div class="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div class="infoMessage">
+    <p>{{ infoMessage }}</p>
+  </div>
+
+  <div id="loader">
+   <div id="box"></div>
+   <div id="hill"></div>
+ </div>
+<div class="form">
+<form id="ajax-form" action={{action}} method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input class='login' type="submit" value='{{valueSubmit}}' />
+</form>
+</div>
+
+<canvas id="canvas" style="visibility: hidden"> </canvas>
+
+<div id="canvas_text" style="visibility:hidden">{{ canvas_text }}</div>
+<div id="canvas_version" style="visibility:hidden">{{ canvas_version }}</div>
+
