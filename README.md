@@ -1,6 +1,7 @@
 # SWAT: Seamless Web Authentication Technology (published in the security and privacy track of WWW2019)
 
-This repository holds the django module that demonstrates SWAT, and
+This repository holds the django module that demonstrates SWAT as well
+as a few scripts written to experiment the idea. A demonstrator of SWAT
 currently run at https://perceval.elen.ucl.ac.be  
   
 The core idea of SWAT is to provide a seamless challenge-response
@@ -13,6 +14,9 @@ natively supported by any mainstream browser, stateless on client
 side and can be transparent to the user. We argue that those
 features facilitate deployment and composition with other
 authentication mechanisms without lowering the user experience.  
+  
+
+Paper link: soon.  
   
 You may register, and try out to authenticate on
 https://perceval.elen.ucl.ac.be/authenticate when the learning
