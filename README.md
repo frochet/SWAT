@@ -16,7 +16,7 @@ features facilitate deployment and composition with other
 authentication mechanisms without lowering the user experience.  
   
 
-Paper link: https://dl.acm.org/citation.cfm?id=3313637 
+Paper link: https://dl.acm.org/citation.cfm?id=3313637 or here: https://uclouvain.be/crypto/people/show/462
   
 You may register, and try out to authenticate on
 https://perceval.elen.ucl.ac.be/authenticate when the learning
